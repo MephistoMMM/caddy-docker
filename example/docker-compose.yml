@@ -1,0 +1,11 @@
+version: '3'
+services:
+  caddyserver:
+    image: caddy:1.0
+    volumes:
+      - ./conf:/root/caddy
+      - ./sources:/srv
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2018:2018"

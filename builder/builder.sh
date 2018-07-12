@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VERSION=${VERSION:-"0.11.0"}
-TELEMETRY=${ENABLE_TELEMETRY:-"true"}
+TELEMETRY=${ENABLE_TELEMETRY:-"false"}
 
 # caddy
 git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
@@ -9,8 +9,8 @@ git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt
     && git checkout -b "v$VERSION"
 
 # plugin helper
-GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
-alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
+# GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
+# alias caddyplug='GOOS=linux GOARCH=amd64 caddyplug'
 
 # telemetry
 run_file="/go/src/github.com/mholt/caddy/caddy/caddymain/run.go"
@@ -29,15 +29,15 @@ if [ "$line" ] && [ $TELEMETRY = "false" ]; then
             enableTelemetry = true
         }
     }
-EOF
+    EOF
 fi
 
 # plugins
-for plugin in $(echo $PLUGINS | tr "," " "); do \
-    go get -v $(caddyplug package $plugin); \
-    printf "package caddyhttp\nimport _ \"$(caddyplug package $plugin)\"" > \
-        /go/src/github.com/mholt/caddy/caddyhttp/$plugin.go ; \
-    done
+# for plugin in $(echo $PLUGINS | tr "," " "); do \
+#     go get -v $(caddyplug package $plugin); \
+#     printf "package caddyhttp\nimport _ \"$(caddyplug package $plugin)\"" > \
+#         /go/src/github.com/mholt/caddy/caddyhttp/$plugin.go ; \
+#     done
 
 # builder dependency
 git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/builds
