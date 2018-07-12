@@ -29,7 +29,7 @@ if [ "$line" ] && [ $TELEMETRY = "false" ]; then
             enableTelemetry = true
         }
     }
-    EOF
+EOF
 fi
 
 # plugins
