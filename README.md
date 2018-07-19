@@ -29,8 +29,6 @@ This script will build some necessary docker images, create your service_dir if 
 
 Point your browser to `http://127.0.0.1:80`.
 
-> Be aware! If you don't bind mount the location certificates are saved to, you may hit Let's Encrypt rate [limits](https://letsencrypt.org/docs/rate-limits/) rending further certificate generation or renewal disallowed (for a fixed period)! See "Saving Certificates" below!
-
 All of running configurations could be modified in [docker-compose.yml](https://github.com/MephistoMMM/caddy-docker/blob/master/docker-compose.yml), except *Paths in container*.
 
 #### Paths in container
